@@ -5,9 +5,9 @@ import React, { useEffect, useState } from 'react';
 // import AsyncStorage from '@react-native-async-storage/async-storage';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StyleSheet, Text, View, TextInput, LogBox, Button } from 'react-native';
-// import { AsyncStorage } from 'react-native';
-import * as firebase from 'firebase';
+import firebase from 'firebase';
 import 'firebase/firestore';
+import { GiftedChat } from 'react-native-gifted-chat';
 
 const firebaseConfig = {
   apiKey: "AIzaSyB-ttWYyAbLM2qoWu0lD6M7fFJGtbrvJhQ",
@@ -25,12 +25,28 @@ if(firebase.apps.length ===0){
 // LogBox.ignoreWarnings(['Setting a timer for a long period of time']);
 
 
+const db = firebase.firestore()
+const chatRef = db.collection('chats')
+
 
 export default function App() {
   const [user, setUser] = useState(null);
   const [name, setName] = useState('');
+  const [message, setMessage] = useState([])
+
   useEffect(() => {
     readUser();
+
+    const unSubscribe = chatRef.onSnapshot((querySnapShot) => {
+      const messageFireStore = querySnapShot.docChanges().filter(({type}) => type == 'added')
+                                  .map(({doc}) => {
+                                    const message = doc.data()
+                                    return {...message, createdAt: message.create.toDate()}
+                                  })
+                                  .sort((a, b) => b.createdAt.getItem() - a.createdAt.getItem())
+    setMessage(messageFireStore)
+    })
+    
   }, [])
 
   async function readUser(){
@@ -47,6 +63,11 @@ export default function App() {
     setUser(user)
 }
 
+async function handleSend(messages) {
+  const writes = messages.map((m) => chatRef.add(n))
+  await Promise.all(writes)
+}
+
   if (!user) {
     return (
         <View style={styles.container}>
@@ -56,12 +77,7 @@ export default function App() {
     )
 }
 
-  return (
-    <View style={styles.container}>
-      <Text>We have an user</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+  return <GiftedChat messages={message} user={user} onSend={handleSend} />
 }
 
 const styles = StyleSheet.create({
