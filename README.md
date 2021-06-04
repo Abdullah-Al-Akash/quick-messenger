@@ -1,4 +1,4 @@
-# Quick Messenger
+# App Name: Quick Messenger
 
 # Team Member
     1. Nasif Reza Nirjhor(nasif.nirjhor@gmail.com)
@@ -14,4 +14,4 @@ This is a chatting application apps where we use
 
 In this application, first time must provide user name for start chatting, after input user name then he/she can do message with this app and others can also contiunue chatting with someone. By messaging anyone can connect with each other. We will also update this feature in future.
 
-Code Link: 
+Code Link: https://github.com/Abdullah-Al-Akash/quick-messenger
