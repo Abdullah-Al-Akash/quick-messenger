@@ -1,18 +1,10 @@
 // @refresh reset
 import { StatusBar } from 'expo-status-bar';
-<<<<<<< HEAD
 import React, { useEffect, useState, useCallback } from 'react';
 // import AsyncStorage from '@react-native-community/async-storage';
 // import AsyncStorage from '@react-native-async-storage/async-storage';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StyleSheet, Text, View, TextInput, LogBox, Button,  } from 'react-native';
-=======
-import React, { useEffect, useState } from 'react';
-// import AsyncStorage from '@react-native-community/async-storage';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { StyleSheet, Text, View, TextInput, LogBox, Button } from 'react-native';
->>>>>>> e82accca4a3f5a578da8594897c77033a456d5b8
 import firebase from 'firebase';
 import 'firebase/firestore';
 import { GiftedChat } from 'react-native-gifted-chat';
@@ -99,11 +91,11 @@ export default function App() {
 const styles = StyleSheet.create({
   welcome:{
     color: 'salmon',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   container: {
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: '#6DD5FA',
       alignItems: 'center',
       justifyContent: 'center',
       padding: 30,
