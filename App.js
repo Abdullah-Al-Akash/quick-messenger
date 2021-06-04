@@ -99,7 +99,8 @@ export default function App() {
 const styles = StyleSheet.create({
   welcome:{
     color: 'salmon',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    fontSize: '40px',
   },
   container: {
       flex: 1,
